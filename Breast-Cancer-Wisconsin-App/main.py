@@ -7,7 +7,7 @@ import seaborn as sns
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # Loading dataset
-data = pd.read_csv('data.csv')
+data = pd.read_csv('Breast-Cancer-Wisconsin-App/data.csv')
 data.drop(['Unnamed: 32','id'], axis=1, inplace=True)
 X = data.drop('diagnosis',axis =1)
 y = data['diagnosis']
