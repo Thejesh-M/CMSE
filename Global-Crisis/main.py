@@ -11,7 +11,7 @@ st.write('<h1 style="text-align:center; vertical-align:middle; line-height:2; co
 
 
 
-df = pd.read_csv("african_crises.csv")
+df = pd.read_csv("Global-Crisis/african_crises.csv")
 df["banking_crisis"][df["banking_crisis"]=="crisis"] = 1
 df["banking_crisis"][df["banking_crisis"]=="no_crisis"] = 0
 df["banking_crisis"] = pd.to_numeric(df["banking_crisis"])
