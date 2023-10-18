@@ -56,14 +56,14 @@ with tab1 :
         with st.expander("Show Raw Data"):
             # if st.checkbox('Show Raw Data'):
             st.write(pd.DataFrame(df, columns=df.columns))
-            st.write('Basic Breast Cancer Dataset Information:')
+            st.write('Basic Global Crisis Dataset Information:')
             st.write(f'Total Number of Samples: {df.shape[0]}')
             st.write(f'Number of Features: {df.shape[1]}')
 
     with checks[1]:
         with st.expander("Show Statistics about Data"):
             st.write(df.describe())
-            st.write('Basic Breast Cancer Dataset Information:')
+            st.write('Basic Global Crisis Dataset Information:')
             st.write(f'Total Number of Samples: {df.shape[0]}')
             st.write(f'Number of Features: {df.shape[1]}')
 
@@ -131,7 +131,7 @@ with tab2:
 
 
     countries_list = list(df["country"].unique())
-    st.header("Varying trends across time and countries -")
+    st.header("Varying trends across time and countries")
     country_name = st.selectbox("Select a country : ",countries_list)
 
     # Multiselect dropdown for types of crises
@@ -226,7 +226,7 @@ with tab2:
 
 with tab3:
     st.header("What causes a crisis?")
-    st.write("The below plot helps us see if there's a connection between two things. If the dots are all over the place, there might not be a strong connection. f most points cluster together and go up and to the right, it suggests that, in general, as one characteristic increases, the other tends to increase too. Scatter plots help us see patterns and connections in data, making it easier to spot relationships between different factors or variables. Now you can select the feature and the crisis that you are focusing. ")
+    st.write("The below plot helps us see if there's a connection between two things. If the dots are all over the place, there might not be a strong connection. If most points cluster together and go up and to the right, it suggests that, in general, as one characteristic increases, the other tends to increase too. Scatter plots help us see patterns and connections in data, making it easier to spot relationships between different factors or variables. Now you can select the feature and the crisis that you are focusing. ")
 
     # Country dropdown
     countries_list = list(df["country"].unique())
