@@ -28,7 +28,7 @@ scaled_df = df.copy()
 tab1, tab2, tab3 = st.tabs(["About Data", "Crisis Over Time", "Interactive Plots"])
 
 with tab1 :
-    image_path = "bg.png"  # Replace with the actual file path
+    image_path = "Global-Crisis/bg.png"  # Replace with the actual file path
 
     # Check if the image file exists at the specified path
     try:
