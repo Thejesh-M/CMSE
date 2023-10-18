@@ -13,7 +13,6 @@ st.write('<h1 style="text-align:center; vertical-align:middle; line-height:2; co
 
 
 
-
 df = pd.read_csv("Global-Crisis/african_crises.csv")
 df["banking_crisis"][df["banking_crisis"]=="crisis"] = 1
 df["banking_crisis"][df["banking_crisis"]=="no_crisis"] = 0
