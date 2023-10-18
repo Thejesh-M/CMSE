@@ -4,7 +4,10 @@ import pandas as pd
 import altair as alt
 import plotly.express as px
 from PIL import Image
+import hiplot as hip
+import matplotlib.pyplot as plt
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(layout="wide")
 
 
@@ -36,9 +39,17 @@ with tab1 :
     except FileNotFoundError:
         pass
 
+    st.write('Welcome to our web app dedicated to exploring the economic landscape of African countries. Africa, a continent of incredible diversity and promise, has faced its share of economic challenges over the years. This platform is your gateway to understanding the different types of crises that have shaped the economic trajectory of African nations.')
+    st.write('From financial meltdowns to currency turmoil and banking crises, this interactive visualization dives deep into the data, allowing you to uncover patterns, trends, and insights that shed light on the economic realities of the continent. With the power to explore crisis dynamics across regions and time, this tool empowers you to draw valuable conclusions and insights from the data.')
+
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
     st.write('This dataset is a derivative of Reinhart et. Global Financial Stability dataset which can be found online at: https://www.hbs.edu/behavioral-finance-and-financial-stability/data/Pages/global.aspx The dataset will be valuable to those who seek to understand the dynamics of financial stability within the African context.')
     st.write('The dataset specifically focuses on the Banking, Debt, Financial, Inflation and Systemic Crises that occurred, from 1860 to 2014, in 13 African countries, including: Algeria, Angola, Central African Republic, Ivory Coast, Egypt, Kenya, Mauritius, Morocco, Nigeria, South Africa, Tunisia, Zambia and Zimbabwe.')
     st.write('This dataset consists a total of 1059 records and 14 features to study the crisis. This data is collected by behavioral Finance & Financial Stability students at harvard business school. Some of the important features in the dataset are country, year, exchange rates in USD, domestic debt, sovereign external debt, gdp, annual inflation.')
+
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+    st.write('If you want to check the raw data, you can see by clicking on the Show Raw data button below. If you are interested in the numbers, check the statistics section below for a detailed breakdown of features and there statistical analysis.')
     checks = st.columns(2)
     # Display the dataset
     with checks[0]:
@@ -56,9 +67,14 @@ with tab1 :
             st.write(f'Total Number of Samples: {df.shape[0]}')
             st.write(f'Number of Features: {df.shape[1]}')
 
+    st.write('Understand more about the  data and deep dive by going through the interactive plots and visualizations in the next tabs.')
+
 with tab2:
 
     st.header("Which countries are more vulnerable to crises across time")
+
+    st.write('Use the below visualization to observe how economic crises are distributed across African countries. Hover over each country to see details of crisis the country got affected on and number of occurences. Also you have an option to select the range of time period using the slider below which helps you to focus on crisis in the particular time period.')
+
     # st.header("Varying trends across time and countries")
     # Time Slider
     values = st.slider(
@@ -83,9 +99,18 @@ with tab2:
 
     st.altair_chart(c2, use_container_width=True)
 
+    p1_obs = ['1. The country that shows the highest count for systemic crisis is Central African Republic followed by Zimbabwe and Kenya.',
+              '2. Angolo, Zambia and Zimbabwe suffered more number of inflations compared to all other african countries.',
+              '3. South Africa has the lowest number of inflation crisis.',
+              '4. Zimbabwe has higher number of crisis (Systemic, Currency, Inflation, Banking)']
+    for point in p1_obs:
+        st.write(point)
+
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
 
     st.header("Crisis Over Time")
-    st.write('Select the type of Crisis you want ')
+    st.write('These Visualization shows how the particular crisis occured over time across different countries in africa. Select the type of Crisis you want check that occurred over time across the countries. You can use the below dropdown option to select the crisis and there is play and stop options for the below visualization aswell as a slider. ')
     crisis_type = st.selectbox("Select Crisis : ",['currency_crises', 'inflation_crises','systemic_crisis', 'banking_crisis'])
     df['year'] = df['year'].dt.year
     fig = px.choropleth(df, locations='cc3', animation_frame='year',
@@ -102,10 +127,7 @@ with tab2:
     st.plotly_chart(fig)
 
 
-
-
-
-
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
 
     countries_list = list(df["country"].unique())
@@ -188,18 +210,23 @@ with tab2:
 
     observations = [
         '1. Some countries have relatively lower exchange rate than other countries. Countries like South Africa, Zambia, Egypt and Morocco has relatively lower exchange rate.',
-'2. The exchange rate is almost zero for all the countries before 1940. This might be because the value is not recorded or a new currency had been adopted by the countries.',
-'3. There are tremendous spikes in the exchange rate Angola and Zimbabwe.'
+'2. The exchange rate is almost zero for all the countries before 1940. This is because, most of the countries would have opted for new currency system after independece. For example, Tunisian dinar was introduced in 1960 and the Algerian dinar was introduced in 1964 (Reference: Wikipedia).',
+'3. There are tremendous spikes in the exchange rate Angola and Zimbabwe.',
+ '4. Egypt has been an independent country since 1850s. However its exchange rate has started increasing from 1970s. Lets consider Egypt as a special case in respective to independence.',
+'5. The exchange rate had gone up after the independence for almost all the countries expect Tunisia. Except Tunisia and Ivory coast, the exchange rate for all the countries have been increasing from the independence with some fluctuations. There are some sudden spikes in the exchange rate. Angolan Kwanza - In 1999, a second currency was introduced in Angola called the kwanza and it suffered early on from high inflation (Wikipedia). Tunisian dinar was introduced in 1960, hence a spike.'
     ]
 
     st.write('<h3>Observations :</h3>', unsafe_allow_html=True)
     for point in observations:
         st.write(point)
 
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+    st.write('Now Lets move on to some Interactive plots...!!!')
+
 
 with tab3:
     st.header("What causes a crisis?")
-
+    st.write("The below plot helps us see if there's a connection between two things. If the dots are all over the place, there might not be a strong connection. f most points cluster together and go up and to the right, it suggests that, in general, as one characteristic increases, the other tends to increase too. Scatter plots help us see patterns and connections in data, making it easier to spot relationships between different factors or variables. Now you can select the feature and the crisis that you are focusing. ")
 
     # Country dropdown
     countries_list = list(df["country"].unique())
@@ -244,3 +271,73 @@ with tab3:
 
     hc = alt.hconcat(c3, c4)
     st.altair_chart(hc, use_container_width=True)
+
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+    st.header('Feature Vs Crisis :')
+    col_1,col_2=st.columns(2,gap='small')
+    st.write("The below plot helps you quickly see where most of the data falls, where the middle value is, and whether there are any unusual values. It's like a snapshot of your data, making it easier to understand and compare different sets of numbers. Any data points that fall much higher or lower than the rest are shown as dots. These are called outliers, and they can help you identify unusual or extreme values in your data. Now you can select the feature and the crisis that you are focusing. So you can observe some interesting facts.")
+    numeric_columns = df.select_dtypes(include=['int', 'float']).columns.tolist()
+    selected_feature = col_1.selectbox('Select a feature', numeric_columns)
+    crisis_type = col_2.selectbox('Type of Crisis:', ['banking_crisis', 'systemic_crisis', 'inflation_crises', 'currency_crises'])
+    y = df[crisis_type]
+
+    st.subheader(f'Box Plot of {selected_feature} w.r.t {crisis_type}')
+
+    # Create an interactive box plot using Plotly Express
+    fig = px.box(df, x=(y == 1), y=selected_feature,color=crisis_type, labels={selected_feature: selected_feature})
+    fig.update_xaxes(categoryorder='total ascending')
+    fig.update_traces(marker=dict(size=5), boxpoints='all', jitter=0.3)
+    fig.update_layout(xaxis_title=crisis_type, yaxis_title=selected_feature, showlegend=False)
+    fig.update_layout(height=600, width=800)
+    # Display the interactive plot
+    st.plotly_chart(fig)
+
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+    st.header('Decoding Crises: The Financial Story')
+    st.write("The below colorful chart is like a magic lens that helps you to understand better about the data. The bars you see represent different groups within our data, each with a different color. Each bar shows us how many times something happened (like a crisis) and how it relates to something else (like a financial factor). The height of the bars tells us how often it occurred, and you can hover your mouse over them to see specific numbers. The way the bars overlap, like they're hugging each other, shows how these things are connected. If one group's bars are mostly on one side and another group's bars are on the other side, it tells us that they're different in some way. Feeling Like I explained much 😅. Go on play with the data.")
+    col1,col2=st.columns(2,gap='small')
+    st.subheader('Select a feature for the histogram:')
+    selected_feature = col1.selectbox('Select a feature', df.columns.tolist())
+    crisis_format = col2.selectbox('Type of Crisis :', ['banking_crisis', 'systemic_crisis', 'inflation_crises', 'currency_crises'])
+    bin_count = st.slider('Number of Bins', min_value=1, max_value=100, value=20)
+
+    st.subheader(f'Histogram of {selected_feature}')
+
+    # Create an interactive histogram using Plotly Express
+    fig = px.histogram(df, x=selected_feature, color=crisis_format, nbins=bin_count)
+    fig.update_xaxes(title_text=selected_feature)
+    fig.update_yaxes(title_text='Count')
+    fig.update_traces(marker=dict(line=dict(width=2)))
+    fig.update_layout(height=700, width=900)
+    # Display the interactive plot
+    st.plotly_chart(fig)
+
+
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+
+    #visualization with HiPlot
+    def save_hiplot_to_html(exp):
+        output_file = "hiplot_plot_1.html"
+        exp.to_html(output_file)
+        return output_file
+    
+    st.header("Visualization with HiPlot")
+    selected_columns = st.multiselect("Select columns to visualize", df.columns,default = ['exch_usd', 'banking_crisis', 'inflation_annual_cpi'])
+    selected_data = df[selected_columns]
+    if not selected_data.empty:
+        experiment = hip.Experiment.from_dataframe(selected_data)
+        hiplot_html_file = save_hiplot_to_html(experiment)
+        st.components.v1.html(open(hiplot_html_file, 'r').read(), height=1500, scrolling=True)
+    else:
+        st.write("No data selected. Please choose at least one column to visualize.")
+
+    
+    st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
+
+    st.header('Thankyou for Visiting..!!!')
+
+
+
