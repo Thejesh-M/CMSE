@@ -76,7 +76,7 @@ df["year"] = pd.to_datetime(df.year, format='%Y')
 scaled_df = df.copy()
 
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["About Data", "Crisis Over Time", "Interactive Plots","Predicting Crises","Make Predictions","About me"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["About Data", "Crisis Over Time", "Interactive Plots","Predicting Crisis","Make Predictions","About me"])
 
 with tab1 :
     image_path = "Global-Crisis/bg.png"  # Replace with the actual file path
@@ -90,13 +90,13 @@ with tab1 :
     except FileNotFoundError:
         pass
 
-    st.write('Welcome to our web app dedicated to exploring the economic landscape of African countries. Africa, a continent of incredible diversity and promise, has faced its share of economic challenges over the years. This platform is your gateway to understanding the different types of crises that have shaped the economic trajectory of African nations.')
-    st.write('From financial meltdowns to currency turmoil and banking crises, this interactive visualization dives deep into the data, allowing you to uncover patterns, trends, and insights that shed light on the economic realities of the continent. With the power to explore crisis dynamics across regions and time, this tool empowers you to draw valuable conclusions and insights from the data.')
+    st.write('Welcome to our web app dedicated to exploring the economic landscape of African countries. Africa, a continent of incredible diversity and promise, has faced its share of economic challenges over the years. This platform is your gateway to understanding the different types of crisis that have shaped the economic trajectory of African nations.')
+    st.write('From financial meltdowns to currency turmoil and banking crisis, this interactive visualization dives deep into the data, allowing you to uncover patterns, trends, and insights that shed light on the economic realities of the continent. With the power to explore crisis dynamics across regions and time, this tool empowers you to draw valuable conclusions and insights from the data.')
 
     st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
     st.write('This dataset is a derivative of Reinhart et. Global Financial Stability dataset which can be found online at: https://www.hbs.edu/behavioral-finance-and-financial-stability/data/Pages/global.aspx The dataset will be valuable to those who seek to understand the dynamics of financial stability within the African context.')
-    st.write('The dataset specifically focuses on the Banking, Debt, Financial, Inflation and Systemic Crises that occurred, from 1860 to 2014, in 13 African countries, including: Algeria, Angola, Central African Republic, Ivory Coast, Egypt, Kenya, Mauritius, Morocco, Nigeria, South Africa, Tunisia, Zambia and Zimbabwe.')
+    st.write('The dataset specifically focuses on the Banking, Debt, Financial, Inflation and Systemic Crisis that occurred, from 1860 to 2014, in 13 African countries, including: Algeria, Angola, Central African Republic, Ivory Coast, Egypt, Kenya, Mauritius, Morocco, Nigeria, South Africa, Tunisia, Zambia and Zimbabwe.')
     st.write('This dataset consists a total of 1059 records and 14 features to study the crisis. This data is collected by behavioral Finance & Financial Stability students at harvard business school. Some of the important features in the dataset are country, year, exchange rates in USD, domestic debt, sovereign external debt, gdp, annual inflation.')
 
     st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
@@ -187,7 +187,7 @@ with tab2:
 
     # Multiselect dropdown for types of crises
     crisis_options = st.multiselect(
-        'Types of crises:',
+        'Types of crisis:',
         ['banking_crisis', 'systemic_crisis', 'inflation_crises','currency_crises'],
         default=['banking_crisis', 'systemic_crisis', 'inflation_crises','currency_crises'])
 
