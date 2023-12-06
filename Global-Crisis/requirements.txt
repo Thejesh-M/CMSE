@@ -2,3 +2,6 @@ altair
 seaborn
 plotly
 hiplot
+matplotlib
+scikit-learn
+imbalanced-learn
