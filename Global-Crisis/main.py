@@ -388,7 +388,6 @@ with tab3:
     
     st.markdown("""<hr style="height:3px;border:none;color:#333;background-color:#333;" /> """, unsafe_allow_html=True)
 
-    st.header('Thankyou for Visiting..!!!')
 
 
 with tab4:
